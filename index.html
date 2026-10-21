@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio Fade | Barbershop by appointment</title>
+<meta name="description" content="Every cut changes who you are. Pick your style and book on WhatsApp.">
+<meta name="theme-color" content="#0b0907">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#0b0907;--bg2:#0b0907;--glow:#7a4a14;--accent:#ffb24a;--ink:#f4efe6;--mute:#a89f90;--line:rgba(244,239,230,.14);
+--display:Syne,"Helvetica Neue",Arial,sans-serif;--body:Manrope,system-ui,sans-serif;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:80}
+body::after{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.09;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.nav{position:fixed;z-index:60;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(92vw,720px);display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 22px;border-radius:999px;background:rgba(20,16,12,.55);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--line)}
+.brand{font:800 18px var(--display);text-decoration:none}
+.btn{display:inline-block;background:var(--accent,#ffb24a);color:#140e06;font-weight:800;padding:11px 22px;border-radius:999px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px -6px var(--accent,#ffb24a)}
+.story{position:relative;min-height:100svh;background:radial-gradient(ellipse 80% 60% at 50% 42%,var(--glow),transparent 72%),var(--bg2);overflow:hidden}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fog{position:absolute;inset:0;z-index:5;background:rgba(190,205,215,.3);-webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);pointer-events:none}
+.vig{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(transparent 45%,rgba(0,0,0,.78)),radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))}
+.hero{position:absolute;z-index:6;left:clamp(20px,5vw,72px);right:clamp(20px,5vw,72px);bottom:11svh}
+.hero h1,.scene h2{font:800 clamp(40px,9.5vw,132px)/.95 var(--display);margin:0;letter-spacing:-.025em}
+.hero p{margin:20px 0 0;max-width:30ch;font-weight:600}
+.scene{position:absolute;z-index:4;left:clamp(20px,5vw,72px);right:clamp(20px,5vw,72px);bottom:8svh;display:grid;gap:22px;align-items:end}
+@media(min-width:800px){.scene{grid-template-columns:1fr 340px}}
+.card{padding:22px;border-radius:24px;background:rgba(18,14,10,.5);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line)}
+.card p{margin:0 0 14px}
+.card img{width:100%;height:clamp(84px,14svh,130px);object-fit:cover;border-radius:14px;margin-bottom:14px;display:block}
+.steps img{width:100%;height:150px;object-fit:cover;border-radius:14px;margin:12px 0;display:block}
+.price{font:800 34px/1 var(--display);margin-bottom:16px}
+.price small{font:600 14px var(--body);color:var(--mute);margin-left:8px}
+.count{position:absolute;z-index:7;right:clamp(20px,5vw,72px);top:calc(86px + env(safe-area-inset-top,0px));font:700 18px var(--display);color:var(--mute)}
+.hud{position:absolute;z-index:7;left:0;right:0;bottom:0;height:3px;background:var(--line)}
+.hud i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0)}
+html:not(.anim) .story{min-height:0;padding:130px 0 20px}
+html:not(.anim) #gl,html:not(.anim) .fog,html:not(.anim) .vig,html:not(.anim) .hud,html:not(.anim) .count{display:none}
+html:not(.anim) .hero,html:not(.anim) .scene{position:relative;inset:auto;margin:0 clamp(20px,5vw,72px) 56px}
+section{padding:clamp(64px,10vw,130px) clamp(20px,5vw,72px)}
+h2.t{font:800 clamp(34px,6vw,84px)/1 var(--display);letter-spacing:-.02em;margin:0 0 40px;max-width:16ch}
+.cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.pick{display:flex;flex-direction:column;gap:10px;min-height:400px;padding:14px 14px 22px;border-radius:26px;text-decoration:none;border:1px solid var(--line);background:radial-gradient(circle at 50% -10%,var(--c),transparent 65%),#14100c;transition:transform .25s,border-color .25s}
+.pick:hover{transform:translateY(-6px);border-color:var(--c)}
+.pick h3{margin:auto 0 0;font:800 28px/1 var(--display)}
+.pick p{margin:0;color:var(--mute);font-size:15px}
+.pick b{font:800 24px var(--display)}
+.pick img{width:100%;height:190px;object-fit:cover;border-radius:16px;display:block}
+.pick h3,.pick p,.pick b{padding:0 10px}
+.steps{display:grid;gap:28px;counter-reset:s}
+@media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps div{counter-increment:s;border-top:1px solid var(--line);padding-top:18px}
+.steps div::before{content:counter(s);font:800 44px/1 var(--display);color:var(--accent)}
+.steps h3{margin:8px 0 4px;font-size:20px}.steps p{margin:0;color:var(--mute)}
+.cta{text-align:center;background:linear-gradient(rgba(11,9,7,.74),rgba(11,9,7,.9)),radial-gradient(ellipse at 50% 120%,#7a4a14,transparent 65%),url("https://images.pexels.com/photos/7697226/pexels-photo-7697226.jpeg?auto=compress&cs=tinysrgb&w=1600") center/cover,var(--bg)}
+.cta h2{font:800 clamp(38px,8vw,110px)/.95 var(--display);letter-spacing:-.025em;margin:0 auto 30px;max-width:14ch}
+.gal{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.shot{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;border-radius:22px;border:1px solid var(--line);text-decoration:none;background:#14100c}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.shot:hover img{transform:scale(1.06)}
+.shot span{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.8));font:800 20px var(--display)}
+footer{padding:36px clamp(20px,5vw,72px) 100px;color:var(--mute);display:flex;flex-wrap:wrap;gap:16px 48px;justify-content:space-between;font-size:15px}
+.fab{position:fixed;z-index:60;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+</style>
+</head>
+<body>
+<!-- Name, prices, address and WhatsApp are examples: replace with real data -->
+<header class="nav"><a class="brand" href="#topo">Studio Fade</a><a class="btn" data-svc="an appointment" href="#">Book now</a></header>
+
+<main id="topo">
+<div class="story">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="vig"></div>
+  <div class="hero"><h1>Every cut changes who you are.</h1><p>Scroll and pick your style.</p></div>
+
+  <div class="scene"><h2>The Classic</h2><div class="card"><img loading="lazy" alt="Barber finishing a classic haircut" src="https://images.pexels.com/photos/7697648/pexels-photo-7697648.jpeg?auto=compress&cs=tinysrgb&w=900"><p>Scissor-cut classic, wash and pomade finish.</p><div class="price">R$ 45<small>45 min</small></div><a class="btn" data-svc="The Classic (scissor cut)" href="#">Book this style</a></div></div>
+  <div class="scene"><h2>The Modern</h2><div class="card"><img loading="lazy" alt="Haircut in progress" src="https://images.pexels.com/photos/7697229/pexels-photo-7697229.jpeg?auto=compress&cs=tinysrgb&w=900"><p>Fades, freestyle and designs done with clippers and razor.</p><div class="price">R$ 55<small>50 min</small></div><a class="btn" data-svc="The Modern (fade)" href="#">Book this style</a></div></div>
+  <div class="scene"><h2>The Bearded</h2><div class="card"><img loading="lazy" alt="Barber trimming a beard" src="https://images.pexels.com/photos/7697222/pexels-photo-7697222.jpeg?auto=compress&cs=tinysrgb&w=900"><p>Razor-shaped beard with hot towel and essential oil.</p><div class="price">R$ 35<small>30 min</small></div><a class="btn" data-svc="The Bearded (beard)" href="#">Book this style</a></div></div>
+  <div class="scene"><h2>The Executive</h2><div class="card"><img loading="lazy" alt="Barber working on a client" src="https://images.pexels.com/photos/7697644/pexels-photo-7697644.jpeg?auto=compress&cs=tinysrgb&w=900"><p>Haircut, beard and brows in one unhurried visit.</p><div class="price">R$ 85<small>80 min</small></div><a class="btn" data-svc="The Executive (cut + beard + brows)" href="#">Book this style</a></div></div>
+
+  <div class="fog"></div>
+  <div class="count" aria-hidden="true">0 of 4</div>
+  <div class="hud" aria-hidden="true"><i></i></div>
+</div>
+
+<section id="estilos">
+  <h2 class="t">Who do you want to be today?</h2>
+  <div class="cards">
+    <a class="pick" style="--c:#8a5416" data-svc="The Classic (scissor cut)" href="#"><img loading="lazy" alt="Classic scissor-cut haircut" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=600&q=80"><h3>The Classic</h3><p>Scissor-cut classic.</p><b>R$ 45</b></a>
+    <a class="pick" style="--c:#1f5a9a" data-svc="The Modern (fade)" href="#"><img loading="lazy" alt="Modern fade haircut" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80"><h3>The Modern</h3><p>Fades and freestyle.</p><b>R$ 55</b></a>
+    <a class="pick" style="--c:#1f6a47" data-svc="The Bearded (beard)" href="#"><img loading="lazy" alt="Sharp, well-groomed beard" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80"><h3>The Bearded</h3><p>Razor-shaped beard.</p><b>R$ 35</b></a>
+    <a class="pick" style="--c:#9a1f33" data-svc="The Executive (cut + beard + brows)" href="#"><img loading="lazy" alt="Styled executive haircut" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80"><h3>The Executive</h3><p>Haircut, beard and brows.</p><b>R$ 85</b></a>
+  </div>
+</section>
+
+<section id="modelos">
+  <h2 class="t">Inside the shop</h2>
+  <div class="gal">
+    <a class="shot" data-svc="an appointment" href="#"><img loading="lazy" alt="Barber at work in the shop" src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=600&q=80"><span>The chair</span></a>
+    <a class="shot" data-svc="an appointment" href="#"><img loading="lazy" alt="Barbershop lounge area" src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?auto=format&fit=crop&w=600&q=80"><span>The lounge</span></a>
+    <a class="shot" data-svc="an appointment" href="#"><img loading="lazy" alt="Master barber portrait" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"><span>Master barber</span></a>
+    <a class="shot" data-svc="an appointment" href="#"><img loading="lazy" alt="Fade specialist portrait" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"><span>Fade specialist</span></a>
+  </div>
+</section>
+
+<section>
+  <h2 class="t">Booking takes a minute</h2>
+  <div class="steps">
+    <div><img loading="lazy" alt="Close-up of a men’s haircut" src="https://images.pexels.com/photos/7697219/pexels-photo-7697219.jpeg?auto=compress&cs=tinysrgb&w=700"><h3>Pick your style</h3><p>Tap the card that fits you.</p></div>
+    <div><img loading="lazy" alt="Client seated in the barber chair" src="https://images.pexels.com/photos/7697287/pexels-photo-7697287.jpeg?auto=compress&cs=tinysrgb&w=700"><h3>Send it on WhatsApp</h3><p>The message comes ready, just add the day and time.</p></div>
+    <div><img loading="lazy" alt="Barber cutting a client’s hair" src="https://images.pexels.com/photos/7697226/pexels-photo-7697226.jpeg?auto=compress&cs=tinysrgb&w=700"><h3>Get your confirmation</h3><p>We reply with your reserved time.</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Your chair is waiting.</h2>
+  <a class="btn" data-svc="an appointment" href="#">Book on WhatsApp</a>
+</section>
+</main>
+
+<footer>
+  <div><b>Studio Fade</b><br>123 Example Street, Downtown</div>
+  <div>Monday to Saturday, 9 am to 8 pm<br>Sunday closed</div>
+  <div>© 2026 Studio Fade</div>
+</footer>
+<a class="btn fab" data-svc="an appointment" href="#" aria-label="Book on WhatsApp">WhatsApp</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var WA="5547999999999";
+  document.querySelectorAll("[data-svc]").forEach(function(a){
+    a.href="https://wa.me/"+WA+"?text="+encodeURIComponent("Hi! I’d like to book: "+a.dataset.svc+".");
+    a.target="_blank";a.rel="noopener";
+  });
+  var calm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!window.gsap||!window.ScrollTrigger||calm)return;
+  gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add("anim");
+
+  var T=[
+    {c:"#ffb24a",glow:"#8a5416",bg:"#150e07"},
+    {c:"#4aa8ff",glow:"#1f5a9a",bg:"#07101b"},
+    {c:"#3ddc97",glow:"#1f6a47",bg:"#06140e"},
+    {c:"#ff4a5e",glow:"#9a1f33",bg:"#180a0d"}
+  ];
+  var S={rot:0,tilt:0,x:0,y:0,z:8.5};
+  var key,rim,narrow=false;
+  var story=document.querySelector(".story"),scenes=gsap.utils.toArray(".scene");
+  var bar=document.querySelector(".hud i"),count=document.querySelector(".count");
+  gsap.set(scenes,{autoAlpha:0});
+
+  try{ initGL(); }catch(e){ document.getElementById("gl").style.display="none"; }
+
+  function initGL(){
+    var cv=document.getElementById("gl");
+    var r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+    r.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    r.outputEncoding=THREE.sRGBEncoding;
+    var sc=new THREE.Scene();
+    var cam=new THREE.PerspectiveCamera(36,1,.1,50);
+    // striped barber-pole texture
+    var c=document.createElement("canvas");c.width=c.height=256;var g=c.getContext("2d");
+    g.fillStyle="#efe6d4";g.fillRect(0,0,256,256);g.fillStyle="#241b14";
+    for(var i=-4;i<8;i++){g.beginPath();g.moveTo(i*64,0);g.lineTo(i*64+32,0);g.lineTo(i*64+32-256,256);g.lineTo(i*64-256,256);g.closePath();g.fill();}
+    var tex=new THREE.CanvasTexture(c);tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.encoding=THREE.sRGBEncoding;
+    var pole=new THREE.Group();
+    var body=new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,3.2,64,1),new THREE.MeshPhysicalMaterial({map:tex,roughness:.22,metalness:.05,clearcoat:1,clearcoatRoughness:.1}));
+    var gold=new THREE.MeshStandardMaterial({color:0xd9a24a,metalness:.85,roughness:.28});
+    var capT=new THREE.Mesh(new THREE.CylinderGeometry(.62,.62,.2,64),gold);capT.position.y=1.7;
+    var capB=capT.clone();capB.position.y=-1.7;
+    var ball=new THREE.Mesh(new THREE.SphereGeometry(.3,32,32),gold);ball.position.y=2.0;
+    pole.add(body,capT,capB,ball);sc.add(pole);
+    sc.add(new THREE.AmbientLight(0xffffff,.35));
+    key=new THREE.PointLight(0xffb24a,2.4,0);key.position.set(2.6,2.2,3.5);sc.add(key);
+    rim=new THREE.PointLight(0xffb24a,2.0,0);rim.position.set(-3.2,1,-2.5);sc.add(rim);
+    // steam particles
+    var N=260,pos=new Float32Array(N*3),sp=[];
+    for(var k=0;k<N;k++){pos[k*3]=(Math.random()-.5)*9;pos[k*3+1]=(Math.random()-.5)*7;pos[k*3+2]=(Math.random()-.5)*6;sp.push(.004+Math.random()*.008);}
+    var pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(pos,3));
+    var sc2=document.createElement("canvas");sc2.width=sc2.height=64;var sg=sc2.getContext("2d");
+    var gr=sg.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,"rgba(255,255,255,.9)");gr.addColorStop(1,"rgba(255,255,255,0)");sg.fillStyle=gr;sg.fillRect(0,0,64,64);
+    var pts=new THREE.Points(pg,new THREE.PointsMaterial({size:.22,map:new THREE.CanvasTexture(sc2),transparent:true,opacity:.28,depthWrite:false,blending:THREE.AdditiveBlending}));
+    sc.add(pts);
+    function size(){
+      var w=story.clientWidth,h=story.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
+      narrow=w/h<.85;pole.scale.setScalar(narrow?.78:1);
+    }
+    size();window.addEventListener("resize",size);
+    r.setAnimationLoop(function(){
+      tex.offset.y-=.0035;
+      pole.rotation.y=S.rot;pole.rotation.z=S.tilt;
+      pole.position.set(narrow?0:S.x,narrow?S.y+.9:S.y,0);
+      cam.position.set(0,0,S.z);cam.lookAt(0,narrow?.2:0,0);
+      var a=pg.attributes.position.array;
+      for(var j=0;j<N;j++){a[j*3+1]+=sp[j];if(a[j*3+1]>3.5)a[j*3+1]=-3.5;}
+      pg.attributes.position.needsUpdate=true;
+      r.render(sc,cam);
+    });
+  }
+
+  var tl=gsap.timeline({defaults:{ease:"none"},scrollTrigger:{
+    trigger:".story",start:"top top",end:"+=500%",pin:true,scrub:.6,
+    onUpdate:function(s){
+      bar.style.transform="scaleX("+s.progress+")";
+      var t=s.progress*tl.duration();
+      count.textContent=(t<1?0:Math.min(4,Math.floor((t-1)/1.5)+1))+" of 4";
+    }}});
+
+  tl.to(".fog",{opacity:0,duration:1},0)
+    .to(".hero",{autoAlpha:0,y:-50,duration:.7},.3)
+    .to(S,{z:6.4,rot:1,duration:1},0);
+
+  var P=[{x:0,z:5.6,tilt:.0,rot:2.2},{x:1.1,z:5.2,tilt:.28,rot:3.8},{x:-1.1,z:5.4,tilt:-.24,rot:5.4},{x:0,z:4.4,tilt:.1,rot:7.2}];
+  scenes.forEach(function(el,i){
+    var at=1+i*1.5,col=new THREE.Color(T[i].c);
+    tl.fromTo(el,{autoAlpha:0,y:60},{autoAlpha:1,y:0,duration:.5,ease:"power2.out"},at)
+      .to(story,{"--glow":T[i].glow,"--bg2":T[i].bg,"--accent":T[i].c,duration:.6},at)
+      .to(S,{x:P[i].x,z:P[i].z,tilt:P[i].tilt,rot:P[i].rot,duration:1.3},at);
+    if(key)tl.to([key.color,rim.color],{r:col.r,g:col.g,b:col.b,duration:.6},at);
+    if(i<scenes.length-1)tl.to(el,{autoAlpha:0,y:-60,duration:.4,ease:"power2.in"},at+1.1);
+  });
+  tl.to({},{duration:.6});
+})();
+</script>
+</body>
+</html>
